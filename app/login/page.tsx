@@ -51,7 +51,7 @@ export default function LoginPage() {
       
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl">Welcome back</CardTitle>
+          <CardTitle className="text-2xl">Sign in</CardTitle>
           <CardDescription>
             Sign in to access your briefs
           </CardDescription>
