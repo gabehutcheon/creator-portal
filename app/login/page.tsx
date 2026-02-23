@@ -1,88 +1,38 @@
-'use client'
+import { LoginForm } from "./login-form";
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { createClient } from "@/lib/supabase-client"
-import { useRouter } from 'next/navigation'
+export const metadata = {
+  title: "Sign in — CREATORS",
+};
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const router = useRouter()
-  const supabase = createClient()
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setMessage('')
-
-    try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: 'https://creator-portal-pi.vercel.app/dashboard',
-        },
-      })
-
-      if (error) {
-        setMessage(error.message)
-      } else {
-        setMessage('Check your email for the magic link!')
-      }
-    } catch (error: any) {
-      setMessage(error.message || 'An error occurred')
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
-      {/* Logo */}
-      <div className="mb-8 flex items-center gap-2">
-        <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-          <span className="text-primary-foreground font-bold text-xl">▶</span>
+    <div className="w-full max-w-md px-6">
+      <div className="relative rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-12 md:p-16 transition-all duration-500 hover:border-[var(--border-hover)] shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_8px_40px_rgba(0,0,0,0.4)]">
+        {/* Header — monogram + logo + editorial welcome */}
+        <div className="text-center mb-12 stagger-children">
+          {/* Monogram mark */}
+          <span className="monogram text-xs tracking-[0.35em]">CR</span>
+
+          {/* Logo — refined scale */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/mkultra-logo-pink.jpg"
+            alt="CREATORS"
+            className="h-8 w-auto mx-auto mt-6"
+          />
+
+          {/* Welcome — editorial italic */}
+          <p className="editorial-italic text-lg text-[var(--text-secondary)] mt-6">
+            Welcome back.
+          </p>
         </div>
-        <span className="text-2xl font-bold">CREATORS</span>
+
+        {/* Luxury divider */}
+        <div className="luxury-divider w-full mb-10" />
+
+        {/* Login form */}
+        <LoginForm />
       </div>
-      
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl">Sign in</CardTitle>
-          <CardDescription>
-            Sign in to access your briefs
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={loading}
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Sending...' : 'Send Magic Link'}
-            </Button>
-          </form>
-          {message && (
-            <div className={`mt-4 p-3 rounded text-sm ${message.includes('Check your email') ? 'bg-green-50 text-green-800 dark:bg-green-900/20 dark:text-green-300' : 'bg-red-50 text-red-800 dark:bg-red-900/20 dark:text-red-300'}`}>
-              {message}
-            </div>
-          )}
-        </CardContent>
-      </Card>
     </div>
-  )
+  );
 }
