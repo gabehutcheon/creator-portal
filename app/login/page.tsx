@@ -23,7 +23,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${https://creator-portal-pi.vercel.app}/dashboard`,
+          emailRedirectTo: 'https://creator-portal-pi.vercel.app/dashboard',
         },
       })
 
