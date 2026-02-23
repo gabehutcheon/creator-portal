@@ -40,12 +40,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
+      {/* Logo */}
+      <div className="mb-8 flex items-center gap-2">
+        <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+          <span className="text-primary-foreground font-bold text-xl">▶</span>
+        </div>
+        <span className="text-2xl font-bold">CREATORS</span>
+      </div>
+      
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl">Creator Portal</CardTitle>
+          <CardTitle className="text-2xl">Welcome back</CardTitle>
           <CardDescription>
-            Sign in with your email to access your briefs
+            Sign in to access your briefs
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -73,10 +81,6 @@ export default function LoginPage() {
               {message}
             </div>
           )}
-          <div className="mt-6 text-center text-sm text-muted-foreground">
-            <p>You'll receive a magic link to sign in instantly.</p>
-            <p className="mt-2">Use test@exposure.com.au, cleo@exposure.com.au, or chloe@exposure.com.au for testing.</p>
-          </div>
         </CardContent>
       </Card>
     </div>

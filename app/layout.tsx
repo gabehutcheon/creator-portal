@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Creator Portal — Exposure",
+  title: "Creator Portal",
   description: "Creator portal for managing briefs and submissions",
 };
 
